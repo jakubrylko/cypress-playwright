@@ -7,6 +7,7 @@ on:
       - .github/workflows/cypress.yaml
       - common/**
       - cypress/**
+
   workflow_dispatch:
     inputs:
       device:
@@ -37,17 +38,22 @@ jobs:
       fail-fast: false
       matrix:
         containers: [1, 2, 3]
+
     env:
       BROWSER: ${{ inputs.browser || 'chrome' }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
       - name: Run Cypress tests
         run: yarn cy:run:ci --browser=${{ env.BROWSER }}
         env:
@@ -55,6 +61,7 @@ jobs:
           SPEC: 'tests/demoqa/*.cy.ts'
           SPLIT_INDEX: ${{ strategy.job-index }}
           SPLIT: ${{ strategy.job-total }}
+
       - name: Upload videos
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
