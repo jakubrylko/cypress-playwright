@@ -7,6 +7,7 @@ on:
       - .github/workflows/playwright.yaml
       - common/**
       - playwright/**
+
   workflow_dispatch:
     inputs:
       device:
@@ -32,25 +33,33 @@ jobs:
   playwright:
     name: Playwright tests
     runs-on: ubuntu-latest
+
     env:
       BROWSER: ${{ inputs.browser || 'chromium' }}
+
     permissions:
       contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
       - name: Install Playwright browsers
         run: yarn playwright install --with-deps
+
       - name: Run Playwright tests
         run: yarn pw:run:ci --project=${{ env.BROWSER }}
         env:
           DEVICE: ${{ inputs.device || 'MacBook' }}
+
       - name: Upload report
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
@@ -58,6 +67,7 @@ jobs:
           name: playwright-report
           path: playwright/artifacts/report/
           retention-days: 10
+
       - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
