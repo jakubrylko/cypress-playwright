@@ -1,8 +1,8 @@
 {
-  "name": "web-automation",
-  "license": "MIT",
-  "version": "1.0.0",
   "author": "Jakub Ryłko",
+  "license": "MIT",
+  "name": "cypress-playwright",
+  "version": "1.0.0",
   "gh-pages": "https://jakubrylko.github.io/web-automation",
   "repository": "https://github.com/jakubrylko/web-automation",
   "scripts": {
