@@ -19,6 +19,7 @@ on:
           - 'MacBook'
           - 'iPad'
           - 'iPhone'
+
       browser:
         description: Browser
         required: true
