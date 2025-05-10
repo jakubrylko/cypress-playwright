@@ -38,4 +38,18 @@ export class Utilities {
         : await route.continue()
     })
   }
+
+  async interceptGraphQLRequest(operationName: string): Promise<unknown> {
+    return new Promise((resolve) => {
+      this.page?.on('response', async (response) => {
+        if (response.url().includes('/graphql')) {
+          const request = response.request().postDataJSON()
+          if (request.operationName === operationName) {
+            const json = await response.json()
+            resolve(json)
+          }
+        }
+      })
+    })
+  }
 }
