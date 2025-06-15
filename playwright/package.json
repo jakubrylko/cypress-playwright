@@ -1,0 +1,13 @@
+{
+  "name": "playwright",
+  "license": "MIT",
+  "version": "1.0.0",
+  "dependencies": {
+    "@playwright/test": "^1.47.2"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.0.1",
+    "@zerostep/playwright": "^0.1.5",
+    "allure-playwright": "^3.0.5"
+  }
+}
